@@ -16,7 +16,6 @@
     <modules>
         <module>ping-pong-common</module>
         <module>ping-service</module>
-        <module>ping-main-service</module>
         <module>pong-service</module>
     </modules>
 
