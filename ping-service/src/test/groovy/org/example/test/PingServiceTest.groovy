@@ -30,8 +30,8 @@ class PingServiceTest extends Specification {
     }
     def setup() {
         // 启动多个实例 测试限流代码
-        for (int i = 0; i < pingInstanceNum; i++) {
-            int port = 8081 + i
+        for (int i = 1; i <= pingInstanceNum; i++) {
+            int port = 9000 + i
             ConfigurableApplicationContext context =   new SpringApplicationBuilder()
                     .sources(PingServiceStarter.class) //
                     .profiles("default") //
