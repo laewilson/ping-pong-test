@@ -16,6 +16,18 @@
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
     <dependencies>
+        <!-- 访问数据库框架 MyBatis-Plus  参见 https://baomidou.com/ -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.5.7</version>
+        </dependency>
+        <!-- 数据库驱动 postgresql-->
+        <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.example</groupId>
             <artifactId>ping-pong-common</artifactId>

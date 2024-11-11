@@ -3,6 +3,9 @@ package org.example;
 import lombok.extern.slf4j.Slf4j;
 import org.example.common.data.FlowLimiterLogService;
 import org.example.common.limiter.FlowLimiter;
+import org.example.common.uitl.WebUtil;
+import org.example.model.OperationLog;
+import org.example.service.OperationLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +23,8 @@ public class PongController {
 
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
+    @Autowired
+    private OperationLogService operationLogService;
 
     @Autowired
     private FlowLimiterLogService flowLimiterLogService;
@@ -33,9 +38,17 @@ public class PongController {
 //        map.put("time", simpleDateFormat.format(new Date()));
         String dateStr;
         log.info("hello world: {}", dateStr = simpleDateFormat.format(new Date()));
+        OperationLog operationLog = new OperationLog();
+        operationLog.setAccessTime(new Date());
+        operationLog.setOperation("hello world");
+        operationLog.setState("success");
+        operationLog.setIp(WebUtil.getUserIp());
+        operationLogService.save(operationLog);
+
 
         return Mono.justOrEmpty("world");
     }
+
     @GetMapping("/log-list")
     public List getLogList() {
         return flowLimiterLogService.getLogList();

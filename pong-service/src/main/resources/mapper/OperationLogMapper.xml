@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.OperationLogMapper">
+  <resultMap id="BaseResultMap" type="org.example.model.OperationLog">
+    <!--@mbg.generated-->
+    <!--@Table operation_log-->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="access_time" jdbcType="TIMESTAMP" property="accessTime" />
+    <result column="operation" jdbcType="VARCHAR" property="operation" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, access_time, "operation", ip, "state"
+  </sql>
+</mapper>

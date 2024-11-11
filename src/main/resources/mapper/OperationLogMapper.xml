@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.OperationLogMapper">
+  <resultMap id="BaseResultMap" type="org.example.model.OperationLog">
+    <!--@mbg.generated-->
+    <!--@Table operation_log-->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="access_time" jdbcType="TIMESTAMP" property="accessTime" />
+    <result column="operation" jdbcType="VARCHAR" property="operation" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, access_time, "operation", ip, "state"
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from operation_log
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--@mbg.generated-->
+    delete from operation_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.example.model.OperationLog">
+    <!--@mbg.generated-->
+    insert into operation_log (id, access_time, "operation", 
+      ip, "state")
+    values (#{id,jdbcType=VARCHAR}, #{accessTime,jdbcType=TIMESTAMP}, #{operation,jdbcType=VARCHAR}, 
+      #{ip,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.example.model.OperationLog">
+    <!--@mbg.generated-->
+    insert into operation_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accessTime != null">
+        access_time,
+      </if>
+      <if test="operation != null">
+        "operation",
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="state != null">
+        "state",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="accessTime != null">
+        #{accessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operation != null">
+        #{operation,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.example.model.OperationLog">
+    <!--@mbg.generated-->
+    update operation_log
+    <set>
+      <if test="accessTime != null">
+        access_time = #{accessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operation != null">
+        "operation" = #{operation,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        "state" = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.example.model.OperationLog">
+    <!--@mbg.generated-->
+    update operation_log
+    set access_time = #{accessTime,jdbcType=TIMESTAMP},
+      "operation" = #{operation,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      "state" = #{state,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

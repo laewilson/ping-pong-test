@@ -1,2 +1,9 @@
 server:
   port: 7071
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test
+    username: testusr
+    password: testusr@2024
+    driver-class-name: org.postgresql.Driver
