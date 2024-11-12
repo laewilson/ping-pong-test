@@ -44,8 +44,6 @@ public class PongController {
         operationLog.setState("success");
         operationLog.setIp(WebUtil.getUserIp());
         operationLogService.save(operationLog);
-
-
         return Mono.justOrEmpty("world");
     }
 
