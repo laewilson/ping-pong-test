@@ -8,7 +8,7 @@ import org.springframework.context.ConfigurableApplicationContext
 import spock.lang.Specification
 import spock.util.concurrent.PollingConditions
 
-@SpringBootTest(classes = [PingService.class])
+@SpringBootTest
 class PingServiceTest extends Specification {
 
 

@@ -74,6 +74,9 @@ public class FlowLimiterAspect {
     }
     private void setResponse(FlowLimiter annotation) {
         HttpServletResponse response = WebUtil.getResponse();
+        if (response == null) {
+            return;
+        }
         response.setHeader("X-RateLimit-Limit", String.valueOf(annotation.value()));
         response.setStatus(HttpStatus.TOO_MANY_REQUESTS.value());
         response.setHeader("Retry-After", "1");

@@ -18,17 +18,18 @@ import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.time.Duration;
+
 //ping service
 @EnableScheduling
 @Component
 @Slf4j
 public class PingService {
     //web client for ping
-    private  WebClient webClient;
+    private WebClient webClient;
 
     @PostConstruct
     public void init() {
-       this.webClient = WebClient.create("http://localhost:7071");
+        this.webClient = WebClient.create("http://localhost:7071");
     }
 
     // ping pong
@@ -37,12 +38,13 @@ public class PingService {
         try {
             // get rate limiter and acquire lock
             IRateLimiter rateLimiter = RateLimiterFactory.
-                    create(RateLimiterType.CROSS_PROCESS,2,"ping-service");
+                    create(RateLimiterType.CROSS_PROCESS, 2, "ping-service");
             if (rateLimiter.tryAcquire()) {
 //                log.info("----> get Lock success");
                 // got lock and can send request
-            String result = webClient.get()
-                        .uri("/pong/hello")
+                String port = System.getProperty("server.port");
+                String result = webClient.get()
+                        .uri("/pong/hello?clientId=" + port)
                         .exchangeToMono(clientResponse -> {
                             if (clientResponse.statusCode().is2xxSuccessful()) {
                                 return clientResponse.bodyToMono(String.class).doOnNext(
@@ -60,7 +62,8 @@ public class PingService {
                        /* .subscribe(
                                 response -> {},
                                 error -> log.error("Request send & Pong throttled it: {}", error.getMessage())
-                        )*/;
+                        )*/
+                ;
                 return result;
 
             } else {

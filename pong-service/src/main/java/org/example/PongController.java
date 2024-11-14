@@ -5,6 +5,7 @@ import org.example.common.data.FlowLimiterLogService;
 import org.example.common.limiter.FlowLimiter;
 import org.example.common.uitl.WebUtil;
 import org.example.model.OperationLog;
+import org.example.model.PongDTO;
 import org.example.service.OperationLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,20 +32,20 @@ public class PongController {
 
     @FlowLimiter(name = "hello", value = 1, throwEx = false)
     @GetMapping("/hello")
-    public Mono<?> pong() {
+    public Mono<?> pong(PongDTO dto) {
 
 //        Map<String, String> map = new HashMap<>();
 //        map.put("hello", "world");
 //        map.put("time", simpleDateFormat.format(new Date()));
         String dateStr;
-        log.info("hello world: {}", dateStr = simpleDateFormat.format(new Date()));
+        log.info("Hello World: {},client: {}", dateStr = simpleDateFormat.format(new Date()),dto.clientInfo());
         OperationLog operationLog = new OperationLog();
         operationLog.setAccessTime(new Date());
         operationLog.setOperation("hello world");
         operationLog.setState("success");
         operationLog.setIp(WebUtil.getUserIp());
         operationLogService.save(operationLog);
-        return Mono.justOrEmpty("world");
+        return Mono.justOrEmpty("World");
     }
 
     @GetMapping("/log-list")

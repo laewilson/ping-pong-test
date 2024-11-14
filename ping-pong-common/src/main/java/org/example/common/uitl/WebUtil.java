@@ -11,12 +11,17 @@ public class WebUtil {
 
     public static HttpServletRequest getRequest() {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        assert requestAttributes != null;
+//        assert requestAttributes != null;
+        if (requestAttributes == null) {
+           return null;
+        }
         return requestAttributes.getRequest();
     }
     public static HttpServletResponse getResponse() {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        assert requestAttributes != null;
+        if (requestAttributes == null) {
+            return null;
+        }
         return requestAttributes.getResponse();
     }
     public static String getUserIp() {
@@ -24,6 +29,9 @@ public class WebUtil {
     }
 
     public static String getUserIp(HttpServletRequest request) {
+        if (request == null) {
+            return "UNKNOWN_IP";
+        }
         String ip = request.getHeader("X-Forwarded-For");
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("Proxy-Client-IP");
